@@ -6,9 +6,11 @@ import com.oms.sandbox.parallelism.strategy.GeneratorStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.System.*;
+import static java.lang.System.currentTimeMillis;
+import static java.lang.System.out;
 
 /**
+ * Uses 'for' loop  for sequential processing..
  * @author omsivanesan
  */
 

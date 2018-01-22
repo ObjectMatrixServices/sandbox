@@ -12,6 +12,8 @@ import static java.lang.System.out;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * Uses a Custom Thread Pool, instead of the ForkJoinPool's Common Pool - a Thread Pool shared by the entire
+ * application.
  * @author omsivanesan
  */
 
@@ -27,7 +29,10 @@ public class GeneratorParallelStreamStrategyWithCustomPoolStrategy extends Gener
 
         List<Double> currentFuelLevels;
         try {
-            currentFuelLevels = generatorThreadPool.submit(() -> generators.parallelStream().map(Generator::getCurrentFuelLevel).collect(toList())).get();
+            currentFuelLevels = generatorThreadPool.submit(() -> generators.parallelStream()
+                                                                           .map(Generator::getCurrentFuelLevel)
+                                                                           .collect(toList()))
+                                                   .get();
         } catch (final InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

@@ -1,9 +1,9 @@
 package com.oms.sandbox.parallelism.client;
 
 import com.oms.sandbox.parallelism.model.Generator;
-import com.oms.sandbox.parallelism.strategy.GeneratorServiceContext;
-import com.oms.sandbox.parallelism.strategy.parallel.future.GeneratorCompletableFuturesWithCustomExecutorStrategy;
+import com.oms.sandbox.parallelism.strategy.GeneratorStrategyContext;
 import com.oms.sandbox.parallelism.strategy.parallel.future.GeneratorCompletableFuturesStrategy;
+import com.oms.sandbox.parallelism.strategy.parallel.future.GeneratorCompletableFuturesWithCustomExecutorStrategy;
 import com.oms.sandbox.parallelism.strategy.parallel.stream.GeneratorParallelStreamStrategy;
 import com.oms.sandbox.parallelism.strategy.parallel.stream.GeneratorParallelStreamStrategyWithCustomPoolStrategy;
 import com.oms.sandbox.parallelism.strategy.sequential.GeneratorSequentialForLoopStrategy;
@@ -13,17 +13,21 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import static java.lang.System.*;
+import static java.lang.System.in;
+import static java.lang.System.out;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * Client for the Strategy Pattern.
  * @author omsivanesan
  */
 
 class GeneratorServiceClient {
 
     private static List<Generator> getGenerators() {
-        return IntStream.range(0, 10).mapToObj(i -> new Generator(1)).collect(toList());
+        return IntStream.range(0, 10)
+                        .mapToObj(i -> new Generator(1))
+                        .collect(toList());
     }
 
     public static void main(String[] args) {
@@ -33,8 +37,8 @@ class GeneratorServiceClient {
         out.println("Enter your choice: ");
         String choice = scanner.nextLine();
 
-        while(!choice.equals("x")) {
-            GeneratorServiceContext context = new GeneratorServiceContext();
+        while (!choice.equals("x")) {
+            GeneratorStrategyContext context = new GeneratorStrategyContext();
             switch (choice) {
                 case "1": {
                     context.setGeneratorStrategy(new GeneratorSequentialForLoopStrategy());
@@ -60,7 +64,7 @@ class GeneratorServiceClient {
                     context.setGeneratorStrategy(new GeneratorCompletableFuturesWithCustomExecutorStrategy());
                     break;
                 }
-                default:{
+                default: {
                     context.setGeneratorStrategy(null);
                     displayMenu();
                     break;
@@ -73,7 +77,8 @@ class GeneratorServiceClient {
     }
 
     private static void displayMenu() {
-        out.println("Use the following menu to indicate the strategy to Display Generators' Current Fuel Levels and their average.");
+        out.println("Use the following menu to indicate the strategy to Display Generators' Current Fuel Levels and " +
+                "their average.");
         out.println("1 - Use Sequential \"For\" Loop (1.7 Style)");
         out.println("2 - Use Sequential Streams");
         out.println("3 - Use Parallel Stream");

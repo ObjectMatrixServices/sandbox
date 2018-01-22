@@ -10,6 +10,7 @@ import static java.lang.System.out;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * Uses Parallel Stream. Internally, the ForkJoinPool's Common Pool - a Thread Pool shared by the entire application.
  * @author omsivanesan
  */
 
@@ -21,7 +22,9 @@ public class GeneratorParallelStreamStrategy extends GeneratorStrategy {
 
         long start = currentTimeMillis();
 
-        List<Double> currentFuelLevels = generators.parallelStream().map(Generator::getCurrentFuelLevel).collect(toList());
+        List<Double> currentFuelLevels = generators.parallelStream()
+                                                   .map(Generator::getCurrentFuelLevel)
+                                                   .collect(toList());
 
         displayResults(generators.size(), currentFuelLevels, (currentTimeMillis() - start));
     }

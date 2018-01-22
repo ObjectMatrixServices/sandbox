@@ -5,10 +5,12 @@ import com.oms.sandbox.parallelism.strategy.GeneratorStrategy;
 
 import java.util.List;
 
-import static java.lang.System.*;
+import static java.lang.System.currentTimeMillis;
+import static java.lang.System.out;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * Using Stream for sequential processing.
  * @author omsivanesan
  */
 
@@ -20,7 +22,9 @@ public class GeneratorSequentialStreamStrategy extends GeneratorStrategy {
 
         long start = currentTimeMillis();
 
-        List<Double> currentFuelLevels = generators.stream().map(Generator::getCurrentFuelLevel).collect(toList());
+        List<Double> currentFuelLevels = generators.stream()
+                                                   .map(Generator::getCurrentFuelLevel)
+                                                   .collect(toList());
 
         displayResults(generators.size(), currentFuelLevels, (currentTimeMillis() - start));
     }

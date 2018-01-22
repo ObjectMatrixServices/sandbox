@@ -1,11 +1,13 @@
 package com.oms.sandbox.parallelism.model;
 
-import static java.lang.System.*;
-import static java.lang.Thread.*;
+import static java.lang.Math.random;
+import static java.lang.Math.round;
+import static java.lang.System.out;
+import static java.lang.Thread.currentThread;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static java.lang.Math.*;
 
 /**
+ * Model for Generator
  * @author omsivanesan
  */
 
@@ -16,6 +18,7 @@ public class Generator {
     public Generator(int dummyDelayInSeconds) {
         this.dummyProcessingTimeInSeconds = dummyDelayInSeconds;
     }
+
     public double getCurrentFuelLevel() {
         double currentFuelLevel;
         out.println("Thread Name: " + currentThread().getName());
@@ -24,7 +27,7 @@ public class Generator {
             SECONDS.sleep(dummyProcessingTimeInSeconds);
 
             //Randomly assigning some value to the current fuel level
-            currentFuelLevel = round((random()*100)*100)/100.0;
+            currentFuelLevel = round((random() * 100) * 100) / 100.0;
         } catch (final InterruptedException e) {
             throw new RuntimeException(e);
         }
