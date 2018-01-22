@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import static java.lang.System.*;
-import static java.lang.System.currentTimeMillis;
 import static java.util.concurrent.CompletableFuture.*;
 import static java.util.stream.Collectors.toList;
 
@@ -15,11 +14,11 @@ import static java.util.stream.Collectors.toList;
  * @author omsivanesan
  */
 
-public class GeneratorCompleteableFuturesStrategy extends GeneratorStrategy {
+public class GeneratorCompletableFuturesStrategy extends GeneratorStrategy {
 
     @Override
     public void displayFuelLevelsAndTheirAverage(List<Generator> generators) {
-        out.println("Using GeneratorCompleteableFuturesStrategy:");
+        out.println("Using GeneratorCompletableFuturesStrategy:");
         long start = currentTimeMillis();
 
         List<CompletableFuture<Double>> futures = generators.stream().map(g -> supplyAsync(g::getCurrentFuelLevel))

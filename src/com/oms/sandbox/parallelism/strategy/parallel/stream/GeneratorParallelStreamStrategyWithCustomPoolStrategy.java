@@ -25,7 +25,7 @@ public class GeneratorParallelStreamStrategyWithCustomPoolStrategy extends Gener
 
         ForkJoinPool generatorThreadPool = new ForkJoinPool(10);
 
-        List<Double> currentFuelLevels = null;
+        List<Double> currentFuelLevels;
         try {
             currentFuelLevels = generatorThreadPool.submit(() -> generators.parallelStream().map(Generator::getCurrentFuelLevel).collect(toList())).get();
         } catch (final InterruptedException | ExecutionException e) {

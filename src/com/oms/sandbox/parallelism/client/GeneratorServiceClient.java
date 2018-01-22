@@ -3,7 +3,7 @@ package com.oms.sandbox.parallelism.client;
 import com.oms.sandbox.parallelism.model.Generator;
 import com.oms.sandbox.parallelism.strategy.GeneratorServiceContext;
 import com.oms.sandbox.parallelism.strategy.parallel.future.GeneratorCompletableFuturesWithCustomExecutorStrategy;
-import com.oms.sandbox.parallelism.strategy.parallel.future.GeneratorCompleteableFuturesStrategy;
+import com.oms.sandbox.parallelism.strategy.parallel.future.GeneratorCompletableFuturesStrategy;
 import com.oms.sandbox.parallelism.strategy.parallel.stream.GeneratorParallelStreamStrategy;
 import com.oms.sandbox.parallelism.strategy.parallel.stream.GeneratorParallelStreamStrategyWithCustomPoolStrategy;
 import com.oms.sandbox.parallelism.strategy.sequential.GeneratorSequentialForLoopStrategy;
@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.toList;
  * @author omsivanesan
  */
 
-public class GeneratorServiceClient {
+class GeneratorServiceClient {
 
     private static List<Generator> getGenerators() {
         return IntStream.range(0, 10).mapToObj(i -> new Generator(1)).collect(toList());
@@ -30,6 +30,7 @@ public class GeneratorServiceClient {
         displayMenu();
 
         Scanner scanner = new Scanner(in);
+        out.println("Enter your choice: ");
         String choice = scanner.nextLine();
 
         while(!choice.equals("x")) {
@@ -52,7 +53,7 @@ public class GeneratorServiceClient {
                     break;
                 }
                 case "5": {
-                    context.setGeneratorStrategy(new GeneratorCompleteableFuturesStrategy());
+                    context.setGeneratorStrategy(new GeneratorCompletableFuturesStrategy());
                     break;
                 }
                 case "6": {
@@ -66,7 +67,7 @@ public class GeneratorServiceClient {
                 }
             }
             context.displayGeneratorCurrentFuelLevelsAndTheirAverage(getGenerators());
-            out.print("Enter your choice: ");
+            out.println("Enter your choice: ");
             choice = scanner.nextLine();
         }
     }
