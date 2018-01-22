@@ -14,7 +14,10 @@ public abstract class GeneratorStrategy {
 
     protected void displayResults(int numberOfGenerators, List<Double> currentFuelLevels, long duration) {
         System.out.println("Current Fuel Levels: " + currentFuelLevels);
-        System.out.println("Current Fuel Levels' Average: " + currentFuelLevels.stream().mapToDouble(d -> d).average().getAsDouble());
+        double asDouble = currentFuelLevels.stream()
+                                           .mapToDouble(d -> d)
+                                           .average().orElse(0.0);
+        System.out.println("Current Fuel Levels' Average: " + asDouble);
         System.out.printf("Serviced %d generators in %d millis\n", numberOfGenerators, duration);
         System.out.println("**************************************************************************************");
     }

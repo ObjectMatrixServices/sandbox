@@ -30,8 +30,6 @@ public class GeneratorServiceClient {
         displayMenu();
 
         Scanner scanner = new Scanner(in);
-
-        out.print("Enter your choice: ");
         String choice = scanner.nextLine();
 
         while(!choice.equals("x")) {
@@ -68,6 +66,7 @@ public class GeneratorServiceClient {
                 }
             }
             context.displayGeneratorCurrentFuelLevelsAndTheirAverage(getGenerators());
+            out.print("Enter your choice: ");
             choice = scanner.nextLine();
         }
     }
