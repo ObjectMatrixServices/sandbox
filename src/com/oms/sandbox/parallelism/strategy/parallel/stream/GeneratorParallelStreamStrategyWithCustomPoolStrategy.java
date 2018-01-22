@@ -21,7 +21,7 @@ public class GeneratorParallelStreamStrategyWithCustomPoolStrategy extends Gener
 
     @Override
     public void displayFuelLevelsAndTheirAverage(List<Generator> generators) {
-        out.println("Using GeneratorParallelStreamStrategy:");
+        out.println("Using GeneratorParallelStreamStrategyWithCustomPoolStrategy:");
 
         long start = currentTimeMillis();
 
